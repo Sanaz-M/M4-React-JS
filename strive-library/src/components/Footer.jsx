@@ -1,4 +1,3 @@
-import './Footer.css';
 
 const Footer = (props) => (
     <div id="footer1">
