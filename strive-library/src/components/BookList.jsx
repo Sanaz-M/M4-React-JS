@@ -5,21 +5,22 @@ import { Component } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 
 class BookList extends Component {
-    stat = {
-        query: " ",
+    state = {
+        query: "",
     }
 
-    filterBookList(query) {
-        return this.props.books.filter((book) => book.title.include(query));
+    filterBookList() {
+        return books.filter((book) => book.title.toLowerCase().includes(this.state.query));
     }
 
     render() {
         return (
             <Container>
                 <Row>
-                    <Form.Group>
+                    <Form.Group className="searchBar1">
                         <Form.Label>Search</Form.Label>
-                        <Form.Control
+                        <Form.Control 
+                            id="searchBar"
                             type="text"
                             placeholder="search"
                             value={this.state.query}
@@ -28,9 +29,9 @@ class BookList extends Component {
                     </Form.Group>
                 </Row>
                 <Row>
-                    {this.filterBookList(this.state.query).map((book => (
-                        <Col key={book.asin}>
-                            <SingleBook title={book.title} img={book.img} />
+                    {this.filterBookList().map((book => (
+                        <Col md={3} className="my-5" key={book.asin}>
+                            <SingleBook title={book.title} img={book.img} price={book.price}/>
                         </Col>
                     )))}
                 </Row>
