@@ -6,24 +6,24 @@ class SingleBook extends Component {
 
     state = {
         selectedBook: false,
-        comment:{
-        yourComment: '',
+        yourComment:{
+        comment: '',
         rate : '1',
         elementId : '',
         }
     }
 
 
-    commentInput = (fieldName, value) => {
+    commentInput = () => {
         this.setState({
             comment: {
                 ...this.state.comment,
-                [fieldName]: value
+
             }
         })
     }
 
-    componentDidMount = async () => {
+    postNewComment = async () => {
         try {
           const response = await fetch("https://striveschool-api.herokuapp.com/api/comments/" ,{
               methode: 'POST',
@@ -34,7 +34,7 @@ class SingleBook extends Component {
           })
           if(response.ok) {
             const data = await response.json()
-              this.setState({ comment: data })
+              this.setState({ yourComment: data })
           } else {
               console.log('error while fetching')
           }
@@ -42,6 +42,31 @@ class SingleBook extends Component {
           console.log(e)
         }
       }
+
+
+
+      getOthersComment = async () => {
+        try {
+          const response = await fetch("https://striveschool-api.herokuapp.com/api/comments/" + this.props.elementId ,{
+              methode: 'GET',
+              headers: {
+                'Content-type': 'application/json',
+                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTgyOGJmM2FhY2FhMjAwMTU1MmExNmQiLCJpYXQiOjE2MzU5NDU0NTksImV4cCI6MTYzNzE1NTA1OX0.68CC8Jf4IHn7VZW39FPf-bHEv8MKux00DbaR2yT026Y"
+              }
+          })
+          if(response.ok) {
+            const data = await response.json()
+              this.setState({ yourComment: data })
+          } else {
+              console.log('error while fetching')
+          }
+        } catch(e) {
+          console.log(e)
+        }
+      }
+
+
+
 
     render() {
         return (
@@ -56,12 +81,12 @@ class SingleBook extends Component {
                         <Button variant="success">Add</Button>
                     </Card.Body>
                 </Card>
-                <Form key={this.props.asin} aria-label="Default select example" style={{ display: this.state.selectedBook ? 'block' : 'none'}} onSubmit= {this.componentDidMount}>
+                <Form key={this.props.asin} aria-label="Default select example" style={{ display: this.state.selectedBook ? 'block' : 'none'}} onSubmit= {this.postNewComment}>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                         <Form.Label>Write your comment here</Form.Label>
                         <Form.Control 
                         as="textarea" 
-                        value={this.state.comment.yourComment} 
+                        value={this.state.yourComment.comment} 
                         onChange={(e) => {
                             this.commentInput('comment', e.target.value)
                         }}
@@ -70,7 +95,7 @@ class SingleBook extends Component {
                     <option>Rate this book:</option>
                     <Form.Check
                         inline
-                        value={this.state.comment.rate} 
+                        value={this.state.yourComment.rate} 
                         label= "1"
                         name="group1"
                         type='radio'
@@ -81,7 +106,7 @@ class SingleBook extends Component {
                     />
                     <Form.Check
                         inline
-                        value={this.state.comment.rate} 
+                        value={this.state.yourComment.rate} 
                         onChange={(e) => {
                             this.commentInput('rate', e.target.value)
                         }}
@@ -92,7 +117,7 @@ class SingleBook extends Component {
                     />
                     <Form.Check
                         inline
-                        value={this.state.comment.rate} 
+                        value={this.state.yourComment.rate} 
                         onChange={(e) => {
                             this.commentInput('rate', e.target.value)
                         }}
@@ -103,7 +128,7 @@ class SingleBook extends Component {
                     />
                     <Form.Check
                         inline
-                        value={this.state.comment.rate} 
+                        value={this.state.yourComment.rate} 
                         onChange={(e) => {
                             this.commentInput('rate', e.target.value)
                         }}
@@ -117,7 +142,7 @@ class SingleBook extends Component {
                         this.commentInput('rate', e.target.value)
                     }}
                         inline
-                        value={this.state.comment.rate} 
+                        value={this.state.yourComment.rate} 
                         label= "5"
                         name="group1"
                         type='radio'
