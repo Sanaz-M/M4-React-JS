@@ -14,7 +14,7 @@ postNewComment = async (e) => {
     e.preventDefault();
     try {
         const response = await fetch("https://striveschool-api.herokuapp.com/api/comments/", {
-            methode: 'POST',
+            method: 'POST',
             body: JSON.stringify(this.state.comment),
             headers: {
                 'Content-type': 'application/json',
@@ -66,7 +66,7 @@ render() {
                             <option>5</option>
                         </Form.Control>
                     </Form.Group>
-                    <Button variant="primary" style={{ width: "70px" }} block>Submit</Button>
+                    <Button type="submit" variant="primary" style={{ width: "70px" }} block>Submit</Button>
                 </Form>
       </div>
     );

@@ -31,7 +31,7 @@ class BookList extends Component {
                 <Row>
                     {this.filterBookList().map((book => (
                         <Col md={3} className="my-5" key={book.asin}>
-                            <SingleBook title={book.title} img={book.img} price={book.price}/>
+                            <SingleBook title={book.title} img={book.img} price={book.price} asin={book.asin}/>
                         </Col>
                     )))}
                 </Row>
