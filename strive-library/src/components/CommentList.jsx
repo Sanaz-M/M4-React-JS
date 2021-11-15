@@ -5,7 +5,7 @@ const CommentList = ({ previousComments }) => (
     <ListGroup>
         {
             previousComments.map(comment => (
-                <SingleComment comment={comment} key={comment._id} />
+                <SingleComment comment={comment} key={comment._id} rate={comment.rate} />
             ))
         }
     </ListGroup>

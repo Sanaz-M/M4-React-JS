@@ -18,7 +18,7 @@ postNewComment = async (e) => {
             body: JSON.stringify(this.state.comment),
             headers: {
                 'Content-type': 'application/json',
-                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTgyOGJmM2FhY2FhMjAwMTU1MmExNmQiLCJpYXQiOjE2MzU5NDU0NTksImV4cCI6MTYzNzE1NTA1OX0.68CC8Jf4IHn7VZW39FPf-bHEv8MKux00DbaR2yT026Y"
+                Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTgyOGJmM2FhY2FhMjAwMTU1MmExNmQiLCJpYXQiOjE2MzU5NDU0NTksImV4cCI6MTYzNzE1NTA1OX0.68CC8Jf4IHn7VZW39FPf-bHEv8MKux00DbaR2yT026Y"
             }
         })
         if (response.ok) {
@@ -33,7 +33,7 @@ postNewComment = async (e) => {
 
 render() {
     return (
-      <div>
+
         <Form aria-label="Default select example"  onSubmit={this.postNewComment}>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                         <Form.Label>Write your comment here</Form.Label>
@@ -55,7 +55,7 @@ render() {
                             value={this.state.comment.rate}
                             onChange={(e) =>
                                 this.setState({
-                                  comment: { ...this.state.comment,comment: e.target.value}
+                                  comment: { ...this.state.comment, rate: e.target.value}
                                 })
                               }
                         >
@@ -68,7 +68,6 @@ render() {
                     </Form.Group>
                     <Button type="submit" variant="primary" style={{ width: "70px" }} block>Submit</Button>
                 </Form>
-      </div>
     );
   }
 }
