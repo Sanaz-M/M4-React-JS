@@ -1,15 +1,22 @@
 // import { Component } from "react";
 import { Button, Form } from 'react-bootstrap'
-import { useState } from "react";
-import asin from '../data/scifi.json'
+import { useState, useEffect } from "react";
 
 
-const AddComment = () => {
+const AddComment = ({ asin }) => {
   const [comment, setComment] = useState({
     comment: '',
     rate: 1,
-    elementId: asin
+    elementId: null
   })
+
+  useEffect(() => {
+    setComment((c) => ({
+      ...c,
+      elementId: asin
+    }));
+  }, [asin]);
+
 
   const postNewComment = async (e) => {
     e.preventDefault();
@@ -24,6 +31,11 @@ const AddComment = () => {
       })
       if (response.ok) {
         alert("Thank you for your comment!")
+        setComment({
+          comment: "",
+          rate: 1,
+          elementId: null
+        });
       } else {
         console.log('Oops! Try again please.')
       }
@@ -39,9 +51,7 @@ const AddComment = () => {
           as="textarea"
           value={comment.comment}
           onChange={(e) =>
-            setComment({
-              comment: { ...comment, comment: e.target.value }
-            })
+            setComment({...comment, comment: e.target.value})
           }
           rows={3} />
       </Form.Group>
@@ -52,9 +62,7 @@ const AddComment = () => {
           as="select"
           value={comment.rate}
           onChange={(e) =>
-            setComment({
-              comment: { ...comment, rate: e.target.value }
-            })
+            setComment({...comment, rate: e.target.value})
           }
         >
           <option>1</option>

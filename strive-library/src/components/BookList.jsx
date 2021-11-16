@@ -1,47 +1,95 @@
 import Form from 'react-bootstrap/Form'
 import SingleBook from './SingleBook'
 import books from '../data/scifi.json'
-import { Component } from 'react'
+// import { Component } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
-import CommentArea from './CommentsArea'
+import CommentArea from './CommentArea'
+import { useState, useEffect } from "react";
 
-class BookList extends Component {
-    state = {
-        query: "",
-    }
 
-    filterBookList() {
-        return books.filter((book) => book.title.toLowerCase().includes(this.state.query));
-    }
+const BookList = ({ books }) => {
 
-    render() {
-        return (
-            <Container>
-                <Row>
-                    <Form.Group className="searchBar1">
-                        <Form.Label>Search</Form.Label>
-                        <Form.Control 
-                            id="searchBar"
-                            type="text"
-                            placeholder="search"
-                            value={this.state.query}
-                            onChange={e => this.setState({ query: e.target.value })}
-                        />
-                    </Form.Group>
-                </Row>
-                <Row>
-                    {this.filterBookList().map((book => (
-                        <Col md={12} className="my-5" key={book.asin}>
-                            <SingleBook title={book.title} img={book.img} price={book.price} asin={book.asin}/>
+    const [query, setQuery] = useState('')
+    const [selectedBook, setSelectedBook] = useState(null)
+
+    const filterBookList=() => {
+                return books.filter(book=>  book.title.toLowerCase().includes(query))
+            }
+
+    return (
+        <Container>
+            <Row>
+                <Col md={8}>
+                    <Row>
+                        <Col>
+                            <Form.Group controlId="formBasicEmail">
+                                <Form.Label>Search</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Search"
+                                    value={query}
+                                    onChange={e => setQuery(e.target.value)}
+                                />
+                            </Form.Group>
                         </Col>
-                        
-                    )))}
-                </Row>
-            </Container>
-        )
-    }
-
+                    </Row>
+                    <Row>
+                        {
+                           filterBookList().map(book => (
+                                <Col md={3} key={book.asin} >
+                                    <SingleBook
+                                        book={book}
+                                        selectedBook={selectedBook}
+                                        changeSelectedBook={asin => setSelectedBook(asin)} />
+                                </Col>
+                            ))
+                        }
+                    </Row>
+                </Col>
+                <Col md={4}>
+                    <CommentArea asin={selectedBook} />
+                </Col>
+            </Row>
+        </Container>
+    )
 }
+// class BookList extends Component {
+//     state = {
+//         query: "",
+//     }
+
+//     filterBookList() {
+//         return books.filter((book) => book.title.toLowerCase().includes(this.state.query));
+//     }
+
+//     render() {
+//         return (
+//             <Container>
+//                 <Row>
+//                     <Form.Group className="searchBar1">
+//                         <Form.Label>Search</Form.Label>
+//                         <Form.Control 
+//                             id="searchBar"
+//                             type="text"
+//                             placeholder="search"
+//                             value={this.state.query}
+//                             onChange={e => this.setState({ query: e.target.value })}
+//                         />
+//                     </Form.Group>
+//                 </Row>
+//                 <Row>
+//                     {this.filterBookList().map((book => (
+//                         <Col md={12} className="my-5" key={book.asin}>
+//                             <SingleBook title={book.title} img={book.img} price={book.price} asin={book.asin}/>
+//                         </Col>
+                        
+//                     )))}
+//                 </Row>
+//             </Container>
+//         )
+//     }
+
+// }
 
 
 export default BookList
