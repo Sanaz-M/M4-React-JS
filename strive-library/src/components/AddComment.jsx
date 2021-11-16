@@ -6,14 +6,25 @@ state = {
     comment: {
         comment: '',
         rate: 1,
-        elementId: this.props.asin
+        elementId: null
     }
 }
+
+componentDidUpdate(prevProps) {
+    if (prevProps.asin !== this.props.asin) {
+      this.setState({
+        comment: {
+          ...this.state.comment,
+          elementId: this.props.asin
+        }
+      });
+    }
+  }
 
 postNewComment = async (e) => {
     e.preventDefault();
     try {
-        const response = await fetch("https://striveschool-api.herokuapp.com/api/comments/", {
+        let response = await fetch("https://striveschool-api.herokuapp.com/api/comments/", {
             method: 'POST',
             body: JSON.stringify(this.state.comment),
             headers: {
@@ -71,6 +82,5 @@ render() {
     );
   }
 }
-
 
 export default AddComment

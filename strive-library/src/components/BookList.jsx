@@ -3,6 +3,7 @@ import SingleBook from './SingleBook'
 import books from '../data/scifi.json'
 import { Component } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
+import CommentArea from './CommentsArea'
 
 class BookList extends Component {
     state = {
@@ -33,6 +34,7 @@ class BookList extends Component {
                         <Col md={12} className="my-5" key={book.asin}>
                             <SingleBook title={book.title} img={book.img} price={book.price} asin={book.asin}/>
                         </Col>
+                        
                     )))}
                 </Row>
             </Container>
