@@ -4,8 +4,6 @@ import AddComment from "./AddComment"
 import Loading from './Loading'
 import Error from './Error'
 
-
-
 class CommentArea extends Component {
 
     state = {
