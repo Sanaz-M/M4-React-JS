@@ -6,9 +6,9 @@ import { Col, Card, Button } from 'react-bootstrap'
 
 const SingleBook = ({ changeSelectedBook, selectedBook, book }) => {
     return (
-
+        <Col md={3}>
             <Card className="bookCards1" onClick={() => changeSelectedBook(book.asin)} style={{ border: selectedBook === book.asin ? "2px solid green" : "none" }}>
-                <Card.Img variant="top" src={book.img} style={{ width: "250px" }} />
+                <Card.Img variant="top" src={book.img} />
                 <Card.Body>
                     <Card.Title className="bookTitle">{book.title}</Card.Title>
                     <Card.Text>
@@ -17,6 +17,7 @@ const SingleBook = ({ changeSelectedBook, selectedBook, book }) => {
                     <Button variant="success">Add</Button>
                 </Card.Body>
             </Card>
+        </Col>
     )
 }
 

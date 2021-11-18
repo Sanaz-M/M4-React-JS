@@ -6,18 +6,25 @@ import Welcome from './components/Welcome';
 // import LatestRelease from './components/LatestRelease';
 import './components/Components.css';
 import BookList from './components/BookList';
-
+import books from './data/scifi.json'
+import Registration from './components/Registration';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 
 function App() {
   return (
-    <div>
-      <FirstNavbar />
-      <Welcome />
-      <BookList />
-      {/* <LatestRelease /> */}
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <div>
+        <FirstNavbar />
+        <Welcome />
+        <Routes>
+        <Route path="/register" element={<Registration/>} />
+        <Route path="/" element={<BookList books={books} />} />
+        </Routes>
+        {/* <LatestRelease /> */}
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 }
 

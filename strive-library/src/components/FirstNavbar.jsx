@@ -1,15 +1,18 @@
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
+import {Link} from 'react-router-dom'
 
 const FirstNavbar = (props) => (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Navbar.Brand href="#home">Strive Library</Navbar.Brand>
+        <Link to="/">
+        <div>Strive Library</div>
+        </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="ml-auto">
-                <Nav.Link href="#features">Home</Nav.Link>
-                <Nav.Link href="#pricing">About</Nav.Link>
-                <Nav.Link href="#pricing">Browse</Nav.Link>
+                <div>Home</div>
+                <div>Register</div>
+                <div>Browse</div>
             </Nav>
         </Navbar.Collapse>
     </Navbar>

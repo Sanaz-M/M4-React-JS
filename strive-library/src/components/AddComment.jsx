@@ -26,7 +26,7 @@ const AddComment = ({ asin }) => {
         body: JSON.stringify(comment),
         headers: {
           'Content-type': 'application/json',
-          Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTgyOGJmM2FhY2FhMjAwMTU1MmExNmQiLCJpYXQiOjE2MzU5NDU0NTksImV4cCI6MTYzNzE1NTA1OX0.68CC8Jf4IHn7VZW39FPf-bHEv8MKux00DbaR2yT026Y"
+          Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTgyOGJmM2FhY2FhMjAwMTU1MmExNmQiLCJpYXQiOjE2MzcyMzcxNDgsImV4cCI6MTYzODQ0Njc0OH0.bGH7oKZ2DmaBqKIQ4q27EGd5vqPUeLULKXRMrXg7YLs"
         }
       })
       if (response.ok) {

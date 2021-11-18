@@ -1,6 +1,5 @@
 import Form from 'react-bootstrap/Form'
 import SingleBook from './SingleBook'
-import books from '../data/scifi.json'
 // import { Component } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import CommentArea from './CommentArea'
@@ -12,38 +11,38 @@ const BookList = ({ books }) => {
     const [query, setQuery] = useState('')
     const [selectedBook, setSelectedBook] = useState(null)
 
-    const filterBookList=() => {
-                return books.filter(book=>  book.title.toLowerCase().includes(query))
-            }
+    const filterBookList = () => {
+        return books.filter(book => book.title.toLowerCase().includes(query))
+    }
 
     return (
         <Container>
             <Row>
                 <Col md={8}>
+                    <Form.Group controlId="formBasicEmail">
+                        <Form.Label>Search</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Search"
+                            value={query}
+                            onChange={e => setQuery(e.target.value)}
+                        />
+                    </Form.Group>
+                </Col>
+            </Row>
+            <Row>
+                <Col md={8}>
                     <Row>
-                        <Col>
-                            <Form.Group controlId="formBasicEmail">
-                                <Form.Label>Search</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Search"
-                                    value={query}
-                                    onChange={e => setQuery(e.target.value)}
-                                />
-                            </Form.Group>
-                        </Col>
-                    </Row>
-                    <Row>
-                        {
-                           filterBookList().map(book => (
-                                <Col md={3} key={book.asin} >
-                                    <SingleBook
-                                        book={book}
-                                        selectedBook={selectedBook}
-                                        changeSelectedBook={asin => setSelectedBook(asin)} />
-                                </Col>
-                            ))
-                        }
+                    {
+                        filterBookList().map(book => (
+
+                            <SingleBook
+                                key={book.asin}
+                                book={book}
+                                selectedBook={selectedBook}
+                                changeSelectedBook={asin => setSelectedBook(asin)} />
+                        ))
+                    }
                     </Row>
                 </Col>
                 <Col md={4}>
@@ -82,7 +81,7 @@ const BookList = ({ books }) => {
 //                         <Col md={12} className="my-5" key={book.asin}>
 //                             <SingleBook title={book.title} img={book.img} price={book.price} asin={book.asin}/>
 //                         </Col>
-                        
+
 //                     )))}
 //                 </Row>
 //             </Container>
