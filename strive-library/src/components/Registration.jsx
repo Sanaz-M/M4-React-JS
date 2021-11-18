@@ -1,5 +1,5 @@
 
-
+import { Button, Container, Row, Col} from "react-bootstrap";
 import { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -16,33 +16,35 @@ const Registration = () => {
     const onChange = (e) => { setFormData({ ...formData, [e.target.name]: e.target.value }); }
 
 
+
     const onSubmit = async (e) => {
         e.preventDefault();
         try {
 
-            if (password === password2) {
-                setFormData = ({
-                    name,
-                    email,
-                    password,
-                })
+            if (password !== password2) {
+
+                alert('Passwords do not match');
 
             } else {
-                console.log('Passwords do not match');
+
+                return setFormData
+
             }
 
-            } 
-            catch (err) {
-                console.error(err);
-            }
         }
+        catch (err) {
+            console.error(err);
+        }
+    }
 
     return (
+        <Container> 
+            <Row className="justify-content-center">
+                <Col md={8}>
+                <h1 className='large text-dark'>Sign Up</h1>
+
         <Fragment>
-            <h1 className='large text-primary'>Sign Up</h1>
-            <p className='lead'>
-                <i className='fas fa-user'></i> Create Your Account
-            </p>
+           
             <form className='form' onSubmit={(e) => onSubmit(e)}>
                 <div className='form-group'>
                     <input
@@ -61,11 +63,8 @@ const Registration = () => {
                         placeholder='Email Address'
                         name='email'
                         value={email}
+                        required
                     />
-                    <small className='form-text'>
-                        This site uses Gravatar so if you want a profile image, use a
-                        Gravatar email
-                    </small>
                 </div>
                 <div className='form-group'>
                     <input
@@ -73,8 +72,8 @@ const Registration = () => {
                         type='password'
                         placeholder='Password'
                         name='password'
-                        minLength='6'
                         value={password}
+                        required
                     />
                 </div>
                 <div className='form-group'>
@@ -83,21 +82,25 @@ const Registration = () => {
                         type='password'
                         placeholder='Confirm Password'
                         name='password2'
-                        minLength='6'
                         value={password2}
+                        required
                     />
                 </div>
-                <input
-                    onChange={onChange}
+                <Button
+                 disabled={!email || !name || !password || !password2}
+                    onSubmit={onChange}
                     type='submit'
-                    className='btn btn-primary'
-                    value='Register'
-                />
+                    className='btn btn-primary'>
+                    Register
+                </Button>
             </form>
             <p className='my-1'>
                 Already have an account? <Link to='/login'>Sign In</Link>
             </p>
         </Fragment>
+        </Col>
+        </Row>
+        </Container>
     );
 };
 
